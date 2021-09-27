@@ -1,21 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './components/HomeScreen';
+import PlayerScreen from './components/PlayerScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Provider } from 'react-redux';
+import store from './reducers/store';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Tab = createBottomTabNavigator();
+
+function App() {
+	return (
+		<Provider store={store}>
+			<NavigationContainer>
+				<Tab.Navigator
+					initialRouteName='Home'
+					screenOptions={({ route }) => ({
+						tabBarIcon: ({ focused, color, size }) => {
+							let iconName;
+							if (route.name === 'Principal') {
+								iconName = focused ? 'football' : 'football-outline';
+							} else if (route.name === 'Jugadores') {
+								iconName = focused ? 'people' : 'people-outline';
+							}
+							return <Ionicons name={iconName} size={size} color={color} />;
+						},
+						tabBarActiveTintColor: 'limegreen',
+						tabBarInactiveTintColor: 'gray',
+						headerTitleAlign: 'center',
+						headerTitleStyle: {
+							color: 'limegreen',
+							// backgroundColor: 'black',
+						},
+						// headerStyle: {
+						// 		backgroundColor: '#833471',
+						// },
+						// tabBarStyle: {
+						// 	backgroundColor: '#833471',
+						// },
+					})}
+				>
+					<Tab.Screen name='Principal' component={HomeScreen} />
+					<Tab.Screen name='Jugadores' component={PlayerScreen} />
+				</Tab.Navigator>
+			</NavigationContainer>
+		</Provider>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

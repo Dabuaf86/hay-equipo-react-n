@@ -1,0 +1,51 @@
+.equipos {
+	display: flex;
+	align-content: center;
+	justify-content: space-evenly;
+}
+
+.equipo {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	/* justify-content: space-evenly; */
+}
+
+.players {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* .btn {
+	background-color: inherit;
+	color: inherit;
+	border-radius: 5em;
+	padding: 1em;
+	text-decoration: underline;
+} */
+
+.btn-amarillo {
+	background-color: yellow;
+	color: black;
+	border-radius: 10em;
+	padding: 1em;
+	text-decoration: underline;
+}
+
+.btn-tri {
+	background-color: red;
+	color: salmon;
+	border-radius: 10em;
+	padding: 1em;
+	text-decoration: underline;
+}
+
+.btn-amarillo,
+.btn-tri:hover {
+	color: inherit;
+	/* background-color: black; */
+	cursor: pointer;
+	font-weight: bold;
+}
