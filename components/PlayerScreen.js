@@ -15,21 +15,21 @@ import style from './Styles';
 
 // let initialState = [
 // 	'Gusti',
-// 	'Pepi',
 // 	'Dani',
-// 	'Gastón',
-// 	'Guille',
-// 	'Leo',
-// 	'Marianito',
 // 	'Tincho',
-// 	'Alexis',
+// 	'Fer',
+// 	'Quito',
+// 	'Pancho',
 // 	'MT',
-// 	'Nico',
-// 	'Maxi',
-// 	'Isa',
-// 	'Andy',
+// 	'Alexis',
 // 	'Gera',
-// 	'GT',
+// 	'Nico',
+// 	'Guille',
+// 	'Germán',
+// 	'Lean G.',
+// 	'Nico Sofo',
+// 	'Pepi',
+// 	'Andy',
 // ];
 
 const PlayerScreen = () => {
@@ -76,7 +76,7 @@ const PlayerScreen = () => {
 		};
 		api.put(endpoint, options).then(res => {
 			if (!res.err) {
-				let newData = players.map(el => (el.id === data.id ? data : el));
+				let newData = players.map(player => (player.id === data.id ? data : player));
 				setPlayers(newData);
 			} else setError(res);
 		});
@@ -101,11 +101,11 @@ const PlayerScreen = () => {
 		} else return;
 	};
 
-	const namePress = (e, i) => {
-		// console.log('EEEEEEEEEEE', i);
-		// console.log('PLAYERS', players);
+	const namePress = (player, i) => {
+		console.log('EEEEEEEEEEE', i);
+		console.log('PLAYERS', players);
 		Alert.alert(`Seguro que querés borrar a ${players[i]}?`);
-		const filteredPlayers = players.filter((el, i) => el[i] !== i);
+		const filteredPlayers = players.filter((player, i) => player[i] !== i);
 		setPlayers(filteredPlayers);
 	};
 
@@ -147,13 +147,13 @@ const PlayerScreen = () => {
 			<View style={style.textContainer}>
 				{/* <FlatList /> */}
 				{players &&
-					players.map((el, i) => (
+					players.map((player, i) => (
 						<Text
 							style={style.textList}
 							key={i}
-							onPress={(e, i) => namePress(e, i)}
+							onPress={(player, i) => namePress(player, i)}
 						>
-							{`${i + 1}. ${el}`}
+							{`${i + 1}. ${player}`}
 						</Text>
 					))}
 			</View>

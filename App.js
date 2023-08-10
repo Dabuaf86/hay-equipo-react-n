@@ -5,7 +5,7 @@ import PlayerScreen from './components/PlayerScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Provider } from 'react-redux';
-import store from './reducers/store';
+import store from './reducers';
 
 const Tab = createBottomTabNavigator();
 

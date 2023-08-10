@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 // import './Futbol.css';
 
-const players = [
-	'Pepi',
-	'Dani',
-	'Gastón',
-	'Guille',
-	'Leo',
-	'Marianito',
-	'Quito',
-	'Tincho',
-	'Alexis',
-	'Fer',
-	'GT',
-	'Guido',
-	'MT',
-	'Nico',
-	'Maxi',
-	'Isa',
-	// 'Andy',
-	// 'Gera',
-	// 'Pancho',
-];
+// const players = [
+// 	'Gusti',
+// 	'Dani',
+// 	'Tincho',
+// 	'Fer',
+// 	'Quito',
+// 	'Pancho',
+// 	'MT',
+// 	'Alexis',
+// 	'Gera',
+// 	'Nico',
+// 	'Guille',
+// 	'Germán',
+// 	'Leo', //'Lean G.',
+// 	'Nico Sofo',
+// 	'Pepi',
+// 	'Andy',
+// ];
 
 const armarEquipo = array => {
 	let result = [];

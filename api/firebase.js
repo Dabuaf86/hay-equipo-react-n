@@ -2,13 +2,13 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyDLFz4idqODEVtWedHg37m-jWj_kZN_ZFk',
-	authDomain: 'react-native-futbol-app.firebaseapp.com',
-	databaseURL: 'https://react-native-futbol-app-default-rtdb.firebaseio.com',
-	projectId: 'react-native-futbol-app',
-	storageBucket: 'react-native-futbol-app.appspot.com',
-	messagingSenderId: '25314621924',
-	appId: '1:25314621924:web:ba35e76f6d7dc6a70deff1',
+	apiKey: process.env.API_KEY,
+	authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+	databaseURL: process.env.EXPO_PUBLIC_DB_URL,
+	projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+	storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+	messagingSenderId: process.env.MESSAGING_SENDER_ID,
+	appId: process.env.EXPO_PUBLIC_APP_ID,
 };
 
 // Initialize Firebase
