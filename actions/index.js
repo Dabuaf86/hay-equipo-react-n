@@ -2,21 +2,21 @@ export const TYPES = {
 	ADD_PLAYER: 'ADD_PLAYER',
 	REMOVE_PLAYER: 'REMOVE_PLAYER',
 	GET_PLAYERS: 'GET_PLAYERS',
-	GET_PLAYER_STATS: 'EDIT_PLAYER_STATS',
+	GET_PLAYER_STATS: 'GET_PLAYER_STATS',
 	SET_PLAYER_STATS: 'SET_PLAYER_STATS',
 	REMOVE_ALL_PLAYERS: 'REMOVE_ALL_PLAYERS',
-	ASSIGN_TEAM1_PLAYER: 'ASSIGN_TEAM1_PLAYER',
-	ASSIGN_TEAM2_PLAYER: 'ASSIGN_TEAM2_PLAYER',
+	SET_TEAM1_PLAYER: 'SET_TEAM1_PLAYER',
+	SET_TEAM2_PLAYER: 'SET_TEAM2_PLAYER',
 	GET_TEAM1_PLAYERS: 'GET_TEAM1_PLAYERS',
 	GET_TEAM2_PLAYERS: 'GET_TEAM2_PLAYERS',
 	RESET_TEAMS: 'RESET_TEAMS',
 };
 
-let address = '';
+let URI = '';
 
 export const getPlayers = () => {
 	return dispatch =>
-		fetch(`${address}/players`)
+		fetch(`${URI}/players`)
 			.then(res => res.json())
 			.then(json => {
 				dispatch({
@@ -28,7 +28,7 @@ export const getPlayers = () => {
 
 export const addNewPlayer = player => {
 	return dispatch =>
-		fetch(`${address}/players/${player}`, {
+		fetch(`${URI}/players/${player}`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -47,7 +47,7 @@ export const addNewPlayer = player => {
 
 export const removePlayer = playerId => {
 	return dispatch =>
-		fetch(`${address}/players/${playerId}`, {
+		fetch(`${URI}/players/${playerId}`, {
 			method: 'DELETE',
 			headers: {
 				Accept: 'application/json',
@@ -66,7 +66,7 @@ export const removePlayer = playerId => {
 
 export const assignTeam1Player = player => {
 	return dispatch =>
-		fetch(`${address}/team1/${player}`, {
+		fetch(`${URI}/team1/${player}`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -77,7 +77,7 @@ export const assignTeam1Player = player => {
 			.then(res => res.json())
 			.then(json => {
 				dispatch({
-					type: 'ASSIGN_TEAM1_PLAYER',
+					type: 'SET_TEAM1_PLAYER',
 					payload: json,
 				});
 			});
@@ -85,7 +85,7 @@ export const assignTeam1Player = player => {
 
 export const assignTeam2Player = player => {
 	return dispatch =>
-		fetch(`${address}/team2/${player}`, {
+		fetch(`${URI}/team2/${player}`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -96,7 +96,7 @@ export const assignTeam2Player = player => {
 			.then(res => res.json())
 			.then(json => {
 				dispatch({
-					type: 'ASSIGN_TEAM2_PLAYER',
+					type: 'SET_TEAM2_PLAYER',
 					payload: json,
 				});
 			});
@@ -104,7 +104,7 @@ export const assignTeam2Player = player => {
 
 export const getTeam1Players = () => {
 	return dispatch =>
-		fetch(`${address}/team1`)
+		fetch(`${URI}/team1`)
 			.then(res => res.json())
 			.then(json => {
 				dispatch({
@@ -116,7 +116,7 @@ export const getTeam1Players = () => {
 
 export const getTeam2Players = () => {
 	return dispatch =>
-		fetch(`${address}/team2`)
+		fetch(`${URI}/team2`)
 			.then(res => res.json())
 			.then(json => {
 				dispatch({
@@ -128,7 +128,7 @@ export const getTeam2Players = () => {
 
 export const getPlayerStats = playerId => {
 	return dispatch =>
-		fetch(`${address}/player/${playerId}`)
+		fetch(`${URI}/player/${playerId}`)
 			.then(res => res.json())
 			.then(json => {
 				dispatch({
@@ -140,7 +140,7 @@ export const getPlayerStats = playerId => {
 
 export const setPlayerStats = player => {
 	return dispatch =>
-		fetch(`${address}/player/${player}`, {
+		fetch(`${URI}/player/${player}`, {
 			method: 'PUT',
 			headers: {
 				Accept: 'application/json',
