@@ -2,11 +2,10 @@ import { useState } from 'react';
 import {
 	Image,
 	ImageBackground,
+	View,
+	Text,
 	ScrollView,
 	StyleSheet,
-	Text,
-	View,
-	useWindowDimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
@@ -15,48 +14,50 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 
-import Logo from '../../../assets/tiro_2.jpg';
 const BGI = require('../../../assets/futbol_1.png');
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
 	// const [email, setEmail] = useState('');
 	// const [password, setPassword] = useState('');
+	// const [passwordRepeat, setPasswordRepeat] = useState('');
 
-	const { height } = useWindowDimensions();
 	const navigation = useNavigation();
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
+		watch,
 	} = useForm();
 
-	const onSignIn = data => {
+	const passwordWatch = watch('password');
+
+	const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;
+	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
+
+	const onSignUp = data => {
 		console.log(data);
-		// Validate user
+		// Validate email and passwords
 
-		navigation.navigate('Home');
+		navigation.navigate('ConfirmEmail');
 	};
 
-	const onForgotPassword = e => {
-		navigation.navigate('ForgotPassword');
+	const onSignIn = e => {
+		navigation.navigate('SignIn');
 	};
 
-	const onSignUp = e => {
-		navigation.navigate('SignUp');
+	const onTC = e => {
+		console.warn('Ver términos y Condiciones');
+	};
+
+	const onPrivacy = e => {
+		console.warn('Ver Política de Privacidad');
 	};
 
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={styles.container}>
 				<ImageBackground style={styles.img} source={BGI}>
-					{/* <View style={styles.logoContainer}>
-						<Image
-							source={Logo}
-							style={[styles.logo, { height: height * 0.3 }]}
-							resizeMode='contain'
-						/>
-					</View> */}
-					<Text style={styles.title}>Ingresar</Text>
+					<Text style={styles.title}>Registro</Text>
 					<View style={styles.login_container}>
 						<SocialSignInButtons />
 						<View style={styles.form_login}>
@@ -64,28 +65,58 @@ const SignInScreen = () => {
 								control={control}
 								name='email'
 								placeholder='Email'
-								rules={{ required: 'Debes ingresar tu email' }}
+								rules={{
+									required: 'Debes ingresar tu email',
+									pattern: {
+										value: EMAIL_REGEX,
+										message: 'Debes ingresar un email válido',
+									},
+								}}
 							/>
 							<CustomInput
 								control={control}
 								name='password'
-								placeholder='Password'
+								placeholder='Contraseña'
 								secureTextEntry
 								rules={{
-									required: 'Debes ingresar una contraseña válida',
+									required: 'Debes ingresar una contraseña',
+									pattern: {
+										value: PASSWORD_REGEX,
+										message:
+											'La contraseña debe tener entre 8 y 15 caracteres y debe contener al menos una letra minúscula, una letra mayúscula y un número',
+									},
 								}}
 							/>
-							<CustomButton onPress={handleSubmit(onSignIn)} text='Ingresar' />
-							<CustomButton
-								onPress={onForgotPassword}
-								text='Recuperar contraseña'
-								type='link'
+							<CustomInput
+								control={control}
+								name='password-repeat'
+								placeholder='Repetir contraseña'
+								secureTextEntry
+								rules={{
+									validate: value =>
+										value === passwordWatch ||
+										'Las contraseñas deben ser iguales',
+								}}
 							/>
+							<CustomButton
+								onPress={handleSubmit(onSignUp)}
+								text='Registrarse'
+							/>
+							<Text style={styles.text}>
+								Al registrarse, confirma que acepta nuestros{' '}
+								<Text style={styles.highlight_text} onPress={onTC}>
+									Términos y Condiciones
+								</Text>{' '}
+								y nuestra{' '}
+								<Text style={styles.highlight_text} onPress={onPrivacy}>
+									Política de Privacidad
+								</Text>
+							</Text>
 							<View style={styles.anchor_text_container}>
-								<Text style={styles.anchor_text}>No tienes una cuenta?</Text>
+								<Text style={styles.anchor_text}>Ya estás registrado?</Text>
 								<CustomButton
-									onPress={onSignUp}
-									text='Registrate acá'
+									onPress={onSignIn}
+									text='Ingresá acá'
 									type='link'
 									width={150}
 								/>
@@ -127,10 +158,10 @@ const styles = StyleSheet.create({
 	},
 	login_container: {
 		alignItems: 'center',
-		padding: 40,
+		padding: 10,
 	},
 	form_login: {
-		marginTop: 50,
+		marginTop: 30,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -143,6 +174,8 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 16,
 	},
+	text: { color: '#e8e8e8', marginVertical: 5 },
+	highlight_text: { color: '#f37a1d', fontWeight: 'bold' },
 });
 
-export default SignInScreen;
+export default SignUpScreen;

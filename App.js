@@ -2,13 +2,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import store from './store';
+import LogInNavigation from './src/navigation';
 
-import SignInScreen from './src/screens/SignInScreen/SignInScreen';
-import HomeScreen from './src/screens/HomeScreen';
+import AboutScreen from './src/screens/AboutScreen/AboutScreen';
+import OutcomeScreen from './src/screens/OutcomeScreen/OutcomeScreen';
 import PlayerScreen from './src/screens/PlayerScreen/PlayerScreen';
 import TeamScreen from './src/screens/TeamScreen/TeamScreen';
-import OutcomeScreen from './src/screens/OutcomeScreen/OutcomeScreen';
-import AboutScreen from './src/screens/AboutScreen/AboutScreen';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -50,7 +49,7 @@ function App() {
 						// },
 					})}
 				>
-					<Tab.Screen name='Principal' component={SignInScreen} />
+					<Tab.Screen name='Principal' component={LogInNavigation} />
 					<Tab.Screen name='Jugadores' component={PlayerScreen} />
 					<Tab.Screen name='Equipos' component={TeamScreen} />
 					<Tab.Screen name='Resultados' component={OutcomeScreen} />
