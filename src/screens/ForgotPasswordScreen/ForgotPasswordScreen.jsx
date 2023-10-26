@@ -1,28 +1,22 @@
 import { useState } from 'react';
 import {
-	Image,
 	ImageBackground,
 	ScrollView,
 	StyleSheet,
 	Text,
 	View,
-	useWindowDimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
 
-import Logo from '../../../assets/tiro_2.jpg';
 const BGI = require('../../../assets/futbol_1.png');
 
-const SignInScreen = () => {
+const ForgotPasswordScreen = () => {
 	// const [email, setEmail] = useState('');
-	// const [password, setPassword] = useState('');
 
-	const { height } = useWindowDimensions();
 	const navigation = useNavigation();
 	const {
 		control,
@@ -30,66 +24,49 @@ const SignInScreen = () => {
 		formState: { errors },
 	} = useForm();
 
-	const onSignIn = data => {
-		console.log(data);
-		// Validate user
+	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 
-		navigation.navigate('Home');
+	const onSend = email => {
+		console.log(email);
+		// Validate email
+
+		navigation.navigate('ResetPassword');
 	};
 
-	const onForgotPassword = e => {
-		navigation.navigate('ForgotPassword');
-	};
-
-	const onSignUp = e => {
-		navigation.navigate('SignUp');
+	const onSignIn = e => {
+		navigation.navigate('SignIn');
 	};
 
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={styles.container}>
 				<ImageBackground style={styles.img} source={BGI}>
-					{/* <View style={styles.logoContainer}>
-						<Image
-							source={Logo}
-							style={[styles.logo, { height: height * 0.3 }]}
-							resizeMode='contain'
-						/>
-					</View> */}
-					<Text style={styles.title}>Ingresar</Text>
+					<Text style={styles.title}>Enviar Código</Text>
 					<View style={styles.login_container}>
-						<SocialSignInButtons />
 						<View style={styles.form_login}>
 							<CustomInput
 								control={control}
 								name='email'
 								placeholder='Email'
-								rules={{ required: 'Debes ingresar tu email' }}
-							/>
-							<CustomInput
-								control={control}
-								name='password'
-								placeholder='Password'
-								secureTextEntry
 								rules={{
-									required: 'Debes ingresar una contraseña válida',
+									required: 'Debes ingresar tu email',
+									pattern: {
+										value: EMAIL_REGEX,
+										message: 'Debes ingresar un email válido',
+									},
 								}}
 							/>
-							<CustomButton onPress={handleSubmit(onSignIn)} text='Ingresar' />
 							<CustomButton
-								onPress={onForgotPassword}
-								text='Recuperar contraseña'
-								type='link'
+								onPress={handleSubmit(onSend)}
+								text='Enviar Código'
 							/>
-							<View style={styles.anchor_text_container}>
-								<Text style={styles.anchor_text}>No tienes una cuenta?</Text>
-								<CustomButton
-									onPress={onSignUp}
-									text='Registrate acá'
-									type='link'
-									width={150}
-								/>
-							</View>
+							<CustomButton
+								onPress={onSignIn}
+								text='Volver al Inicio'
+								type='link'
+								width={150}
+								fontColor={'limegreen'}
+							/>
 						</View>
 					</View>
 				</ImageBackground>
@@ -127,10 +104,11 @@ const styles = StyleSheet.create({
 	},
 	login_container: {
 		alignItems: 'center',
-		padding: 40,
+		padding: 10,
 	},
 	form_login: {
-		marginTop: 50,
+		marginTop: 30,
+		marginBottom: 390, // Ver de corregir esto para que sea automático
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -143,6 +121,14 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 16,
 	},
+	text: {
+		color: '#e8e8e8',
+		marginVertical: 5,
+	},
+	highlight_text: {
+		color: '#f37a1d',
+		fontWeight: 'bold',
+	},
 });
 
-export default SignInScreen;
+export default ForgotPasswordScreen;

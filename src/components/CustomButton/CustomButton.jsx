@@ -1,4 +1,5 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons//MaterialCommunityIcons';
 
 const CustomButton = ({
 	onPress,
@@ -7,6 +8,7 @@ const CustomButton = ({
 	bgColor,
 	fontColor,
 	width = 300,
+	icon,
 }) => {
 	return (
 		<Pressable
@@ -18,6 +20,7 @@ const CustomButton = ({
 				{ width },
 			]}
 		>
+			{icon ? <Icon name={icon} color='#FFF' size={30} /> : null}
 			<Text
 				style={[styles[`text_${type}`], fontColor ? { color: fontColor } : {}]}
 			>
@@ -29,19 +32,24 @@ const CustomButton = ({
 
 const styles = StyleSheet.create({
 	container: {
+		flexDirection: 'row',
 		padding: 10,
 		borderRadius: 50,
 		height: 50,
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'space-evenly',
 		paddingHorizontal: 10,
 		marginVertical: 5,
 	},
 	container_primary: {
 		backgroundColor: '#27CD2E85',
 	},
-	container_secondary: {
+	container_tertiary: {
 		backgroundColor: '#F32B0F85',
+	},
+	container_secondary: {
+		borderColor: '#f37a1d',
+		borderWidth: 2,
 	},
 	container_link: {
 		backgroundColor: '#FFFFFF00',
@@ -49,6 +57,16 @@ const styles = StyleSheet.create({
 	text_primary: {
 		fontSize: 18,
 		color: '#ffffff',
+		fontWeight: 'bold',
+	},
+	text_tertiary: {
+		fontSize: 18,
+		color: '#ffffff',
+		fontWeight: 'bold',
+	},
+	text_secondary: {
+		fontSize: 18,
+		color: '#f37a1d',
 		fontWeight: 'bold',
 	},
 	text_link: {
