@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 
 const BGI = require('../../../assets/futbol_1.png');
 
@@ -20,25 +21,26 @@ const ResetPasswordScreen = () => {
 	// const [newPasswordRepeat, setNewPasswordRepeat] = useState('');
 
 	const navigation = useNavigation();
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-		watch,
-	} = useForm();
+	const { control, handleSubmit, watch } = useForm();
+
+	const auth = FIREBASE_AUTH;
 
 	const passwordWatch = watch('password');
 
 	const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;
 
-	const onSubmit = data => {
-		console.log(data);
-		// Validate code and passwords
+	const onSubmit = async data => {
+		const { email, code, password } = data;
+		try {
+			await auth.forgotPasswordSubmit(email, code, password);
+			navigation.navigate('InsideNavigation');
+		} catch (error) {
+			Alert.alert('Ups! Algo salió mal', error.message);
+		}
 
-		navigation.navigate('Home');
 	};
 
-	const onSignIn = e => {
+	const onSignIn = () => {
 		navigation.navigate('SignIn');
 	};
 

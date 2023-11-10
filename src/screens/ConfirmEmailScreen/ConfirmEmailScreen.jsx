@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import {
+	Alert,
 	ImageBackground,
 	ScrollView,
 	StyleSheet,
 	Text,
 	View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 
 const BGI = require('../../../assets/futbol_1.png');
 
@@ -18,29 +20,51 @@ const ConfirmEmailScreen = () => {
 	// const [email, setEmail] = useState('');
 	// const [confirmationCode, setConfirmationCode] = useState('');
 
+	const route = useRoute();
 	const navigation = useNavigation();
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-	} = useForm();
+	const { control, handleSubmit, watch } = useForm({
+		defaultValues: route?.params?.email,
+	});
+
+	const email = watch('email');
+
+	const auth = FIREBASE_AUTH;
 
 	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 
-	const onConfirm = data => {
-		console.log(data);
-
+	const onConfirm = async data => {
+		const { email, confirmationCode } = data;
+		try {
+			const response = await auth.confirmSignUp(email, confirmationCode);
+			console.log(response);
+			navigation.navigate('InsideNavigation');
+		} catch (error) {
+			Alert.alert('Ups!', error.message);
+		}
 		// Validate email and code
 		navigation.navigate('Home');
 	};
 
-	const onResend = e => {
-		// Reenviar código
+	const onResend = async () => {
+		try {
+			await auth.resendSignUp(email);
+			Alert.alert(
+				'El código de confirmación ha sido enviado a su correo con éxito'
+			);
+		} catch (error) {
+			Alert.alert('Ups!', error.message);
+		}
 	};
 
-	const onSignIn = e => {
+	const onSignIn = () => {
 		navigation.navigate('SignIn');
 	};
+
+	// const handleChange = (name, value) => {
+	// 	name === 'email'
+	// 		? setEmail(value.trim())
+	// 		: setConfirmationCode(value.trim());
+	// };
 
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
@@ -53,6 +77,8 @@ const ConfirmEmailScreen = () => {
 								control={control}
 								name='email'
 								placeholder='Email'
+								value={email}
+								// onChangeText={handleChange}
 								rules={{
 									required: 'Debes ingresar tu email',
 									pattern: {
@@ -65,6 +91,8 @@ const ConfirmEmailScreen = () => {
 								control={control}
 								name='confirmation-code'
 								placeholder='Código de confirmación'
+								value={confirmationCode}
+								// onChangeText={handleChange}
 								rules={{ required: 'Debes ingresar el código recibido' }}
 							/>
 							<CustomButton
