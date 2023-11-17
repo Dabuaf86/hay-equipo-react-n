@@ -14,7 +14,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { FIREBASE_AUTH } from '../../../firebase-config';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
@@ -23,38 +23,31 @@ import Logo from '../../../assets/tiro_2.jpg';
 const BGI = require('../../../assets/futbol_2.jpg');
 
 const SignInScreen = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	const { height, width } = useWindowDimensions();
 	const navigation = useNavigation();
-	const {
-		control,
-		handleSubmit,
-	} = useForm();
+	const { control, handleSubmit } = useForm();
 
 	const auth = FIREBASE_AUTH;
-	console.log('QUÉ TRAE AUTH: ', auth);
 
-	const onSignIn = async () => {
+	const onSignIn = async data => {
+		const { email, password } = data;
+
 		if (loading) return;
-		setLoading(true);
-		try {
-			const response = await auth.signInWithEmailAndPassword(
-				auth,
-				email,
-				password
-			);
-			console.log(response);
-		} catch (error) {
-			console.log(error);
-			Alert.alert('Ups! Algo falló: ' + error.message);
-		} finally {
-			setLoading(false);
-		}
 
-		navigation.navigate('InsideNavigation');
+		setLoading(true);
+
+		signInWithEmailAndPassword(auth, email, password)
+			.then(userCredential => {
+				const user = userCredential.user;
+				console.log(user);
+			})
+			.catch(error => {
+				const errorCode = error.code;
+				Alert.alert('Ups! Algo falló: ' + errorCode);
+			});
+		setLoading(false);
 	};
 
 	const onForgotPassword = e => {

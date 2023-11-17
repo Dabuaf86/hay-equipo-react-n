@@ -50,7 +50,7 @@ const TeamsScreen = () => {
 					<View style={styles.list}>
 						{jugadores &&
 							jugadores.map(jugador => (
-								<View style={styles.content}>
+								<View style={styles.content} key={jugador.jugador}>
 									<Text style={styles.content_text}>{jugador.jugador}: </Text>
 									<Text style={styles.content_text}>{jugador.alias} - </Text>
 									<Text style={styles.content_text}>{jugador.average}</Text>

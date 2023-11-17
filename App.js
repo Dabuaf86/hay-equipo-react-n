@@ -1,11 +1,11 @@
 import { Provider } from 'react-redux';
 import store from './store';
-import LogInNavigation from './src/navigation/LogInNavigation';
+import RootNavigation from './src/navigation';
 
 function App() {
 	return (
 		<Provider store={store}>
-			<LogInNavigation />
+			<RootNavigation />
 		</Provider>
 	);
 }

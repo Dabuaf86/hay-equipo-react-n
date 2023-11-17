@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
-const InsideNavigation = () => {
+const UserNavigation = () => {
 	return (
 		<NavigationContainer independent={true}>
 			<Tab.Navigator
@@ -56,4 +56,4 @@ const InsideNavigation = () => {
 	);
 };
 
-export default InsideNavigation;
+export default UserNavigation;

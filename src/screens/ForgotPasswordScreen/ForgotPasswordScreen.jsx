@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
 	Alert,
 	ImageBackground,
@@ -9,15 +8,14 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { FIREBASE_AUTH } from '../../../firebase-config';
 
 const BGI = require('../../../assets/futbol_1.png');
 
 const ForgotPasswordScreen = () => {
-	// const [email, setEmail] = useState('');
 
 	const navigation = useNavigation();
 	const { control, handleSubmit } = useForm();

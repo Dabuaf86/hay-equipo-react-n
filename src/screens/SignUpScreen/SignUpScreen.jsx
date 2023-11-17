@@ -10,7 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { FIREBASE_AUTH } from '../../../firebase-config';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
@@ -19,9 +19,6 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 const BGI = require('../../../assets/futbol_2.jpg');
 
 const SignUpScreen = () => {
-	// const [email, setEmail] = useState('');
-	// const [password, setPassword] = useState('');
-	const [passwordRepeat, setPasswordRepeat] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	const navigation = useNavigation();
@@ -32,8 +29,7 @@ const SignUpScreen = () => {
 	const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;
 	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 
-	// const auth = FIREBASE_AUTH;
-	const auth = getAuth();
+	const auth = FIREBASE_AUTH;
 
 	const onSignUp = async data => {
 		const { email, password } = data;
@@ -46,27 +42,15 @@ const SignUpScreen = () => {
 			.then(userCredential => {
 				const user = userCredential.user;
 				console.log(user);
+				// navigation.navigate('ConfirmEmail', { email });
 			})
 			.catch(error => {
 				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(`${errorCode}: ${errorMessage}`);
+				// const errorMessage = error.message;
+				// console.log(`${errorCode}: ${errorMessage}`);
+				Alert.alert(`${errorCode}`); // CREAR UN SWITCH PARA MOSTRAR LOS ERRORES AL USUARIO
 			});
-		// try {
-		// 	await auth
-		// 		.createUserWithEmailAndPassword(auth, email, password)
-		// 		.then(userCredential => {
-		// 			const user = userCredential.user;
-		// 			console.log('USER: ', user);
-		// 		});
-		// 	Alert.alert('Cuenta creada.Por favor revisa tu correo');
-		// 	navigation.navigate('ConfirmEmail', { email });
-		// } catch (error) {
-		// 	console.log('CÓDIGO: ', error.code, 'MENSAJE: ', error.message);
-		// 	Alert.alert('Ups! Algo salió mal: ' + error.message);
-		// } finally {
-		// 	setLoading(false);
-		// }
+		setLoading(false);
 	};
 
 	const onSignIn = () => {

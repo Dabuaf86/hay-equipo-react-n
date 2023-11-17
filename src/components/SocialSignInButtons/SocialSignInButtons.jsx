@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import CustomButton from '../CustomButton/CustomButton';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 import {
 	getAuth,
 	getRedirectResult,
@@ -11,7 +12,8 @@ const SocialSignInButtons = () => {
 	const provider = new GoogleAuthProvider();
 	provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-	const auth = getAuth();
+	const auth = FIREBASE_AUTH;
+	// const auth = getAuth();
 	auth.useDeviceLanguage();
 
 	const onSignUpFB = () => {

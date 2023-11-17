@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
 	ImageBackground,
 	ScrollView,
@@ -8,17 +7,14 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { FIREBASE_AUTH } from '../../../firebase-config';
 
 const BGI = require('../../../assets/futbol_1.png');
 
 const ResetPasswordScreen = () => {
-	// const [code, setCode] = useState('');
-	// const [newPassword, setNewPassword] = useState('');
-	// const [newPasswordRepeat, setNewPasswordRepeat] = useState('');
 
 	const navigation = useNavigation();
 	const { control, handleSubmit, watch } = useForm();

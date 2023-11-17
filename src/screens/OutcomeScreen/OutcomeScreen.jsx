@@ -51,7 +51,7 @@ const OutcomeScreen = () => {
 					<View style={styles.list}>
 						{resultados &&
 							resultados.map(resultado => (
-								<View style={styles.content}>
+								<View style={styles.content} key={resultado.lista}>
 									<Text style={styles.content_text}>{resultado.fecha}: </Text>
 									<Text style={styles.content_text}>{resultado.resultado}</Text>
 									<Icon name='magnify' color='#FFF' size={20} />
