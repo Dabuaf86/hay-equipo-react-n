@@ -41,7 +41,7 @@ const SignInScreen = () => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
 				const user = userCredential.user;
-				console.log(user);
+				Alert.alert('Bienvenid@ de vuelta ' + user.email);
 			})
 			.catch(error => {
 				const errorCode = error.code;
