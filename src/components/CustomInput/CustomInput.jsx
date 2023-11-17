@@ -3,10 +3,14 @@ import { Controller } from 'react-hook-form';
 
 const CustomInput = ({
 	control,
+	label,
 	name,
+	width,
 	rules,
 	placeholder,
 	secureTextEntry,
+	autoCapitalize = 'none',
+	keyboardType = 'default',
 }) => {
 	return (
 		<Controller
@@ -18,6 +22,9 @@ const CustomInput = ({
 				fieldState: { error },
 			}) => (
 				<>
+					<Text style={[styles.text_base, styles.label, { width }]}>
+						{label}
+					</Text>
 					<View
 						style={[
 							styles.inputContainer,
@@ -29,8 +36,10 @@ const CustomInput = ({
 							onChangeText={onChange}
 							onBlur={onBlur}
 							placeholder={placeholder}
-							style={styles.input}
+							style={[styles.text_base, styles.input]}
 							secureTextEntry={secureTextEntry}
+							autoCapitalize={autoCapitalize}
+							keyboardType={keyboardType}
 						/>
 					</View>
 					{error && (
@@ -47,6 +56,11 @@ const CustomInput = ({
 };
 
 const styles = StyleSheet.create({
+	text_base: {
+		color: '#fff',
+		fontSize: 18,
+		fontWeight: 'bold',
+	},
 	inputContainer: {
 		backgroundColor: '#ffffff75',
 		width: 300,
@@ -60,8 +74,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	input: {
-		color: '#000',
-		fontSize: 18,
+		width: '100%',
+		textAlign: 'center',
+	},
+	label: {
+		textAlign: 'center',
+		// borderColor: '#e8e8e8',
+		// borderWidth: 1,
 	},
 });
 

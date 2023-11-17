@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-	Image,
+	Alert,
 	ImageBackground,
 	View,
 	Text,
@@ -9,47 +9,59 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { FIREBASE_AUTH } from '../../../firebase-config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 
-const BGI = require('../../../assets/futbol_1.png');
+const BGI = require('../../../assets/futbol_2.jpg');
 
 const SignUpScreen = () => {
-	// const [email, setEmail] = useState('');
-	// const [password, setPassword] = useState('');
-	// const [passwordRepeat, setPasswordRepeat] = useState('');
+	const [loading, setLoading] = useState(false);
 
 	const navigation = useNavigation();
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-		watch,
-	} = useForm();
+	const { control, handleSubmit, watch } = useForm();
 
 	const passwordWatch = watch('password');
 
 	const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;
 	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 
-	const onSignUp = data => {
-		console.log(data);
-		// Validate email and passwords
+	const auth = FIREBASE_AUTH;
 
-		navigation.navigate('ConfirmEmail');
+	const onSignUp = async data => {
+		const { email, password } = data;
+
+		if (loading) return;
+
+		setLoading(true);
+
+		createUserWithEmailAndPassword(auth, email, password)
+			.then(userCredential => {
+				const user = userCredential.user;
+				console.log(user);
+				// navigation.navigate('ConfirmEmail', { email });
+			})
+			.catch(error => {
+				const errorCode = error.code;
+				// const errorMessage = error.message;
+				// console.log(`${errorCode}: ${errorMessage}`);
+				Alert.alert(`${errorCode}`); // CREAR UN SWITCH PARA MOSTRAR LOS ERRORES AL USUARIO
+			});
+		setLoading(false);
 	};
 
-	const onSignIn = e => {
+	const onSignIn = () => {
 		navigation.navigate('SignIn');
 	};
 
-	const onTC = e => {
+	const onTC = () => {
 		console.warn('Ver términos y Condiciones');
 	};
 
-	const onPrivacy = e => {
+	const onPrivacy = () => {
 		console.warn('Ver Política de Privacidad');
 	};
 
@@ -64,6 +76,7 @@ const SignUpScreen = () => {
 							<CustomInput
 								control={control}
 								name='email'
+								label='Email'
 								placeholder='Email'
 								rules={{
 									required: 'Debes ingresar tu email',
@@ -76,6 +89,7 @@ const SignUpScreen = () => {
 							<CustomInput
 								control={control}
 								name='password'
+								label='Contraseña'
 								placeholder='Contraseña'
 								secureTextEntry
 								rules={{
@@ -90,6 +104,7 @@ const SignUpScreen = () => {
 							<CustomInput
 								control={control}
 								name='password-repeat'
+								label='Repetir contraseña'
 								placeholder='Repetir contraseña'
 								secureTextEntry
 								rules={{
@@ -146,15 +161,6 @@ const styles = StyleSheet.create({
 		fontSize: 40,
 		fontWeight: 'bold',
 		color: 'limegreen',
-	},
-	logoContainer: {
-		alignItems: 'center',
-		padding: 20,
-	},
-	logo: {
-		width: '70%',
-		maxWidth: 300,
-		maxHeight: 100,
 	},
 	login_container: {
 		alignItems: 'center',

@@ -9,52 +9,53 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const BGI = require('../../../assets/futbol_2.jpg');
 
-const resultados = [
+const jugadores = [
 	{
-		fecha: '10/11/2023',
-		lista: 'x1',
-		resultado: 'equipo1',
+		jugador: 'Jugador 1',
+		alias: 'Pela',
+		average: '6',
 	},
 	{
-		fecha: '17/11/2023',
-		lista: 'x2',
-		resultado: 'equipo2',
+		jugador: 'Jugador 2',
+		alias: 'Gusti',
+		average: '5',
 	},
 	{
-		fecha: '24/11/2023',
-		lista: 'x3',
-		resultado: 'equipo1',
+		jugador: 'Jugador 3',
+		alias: 'MET',
+		average: '4',
 	},
 	{
-		fecha: '01/12/2023',
-		lista: 'x4',
-		resultado: 'empate',
+		jugador: 'Jugador 4',
+		alias: 'Marianito',
+		average: '7',
 	},
 	{
-		fecha: '08/12/2023',
-		lista: 'x5',
-		resultado: 'equipo2',
+		jugador: 'Jugador 5',
+		alias: 'Tincho',
+		average: '7',
 	},
 	{
-		fecha: '15/12/2023',
-		lista: 'x6',
-		resultado: 'equipo1',
+		jugador: 'Jugador 6',
+		alias: 'Pancho',
+		average: '7',
 	},
 ];
-
-const OutcomeScreen = () => {
+const TeamsScreen = () => {
 	return (
 		<ScrollView>
 			<View style={styles.container}>
 				<ImageBackground style={styles.img} source={BGI}>
-					<Text style={styles.title}>Resultados</Text>
+					<Text style={styles.title}>Armar equipos</Text>
 					<View style={styles.list}>
-						{resultados &&
-							resultados.map(resultado => (
-								<View style={styles.content} key={resultado.lista}>
-									<Text style={styles.content_text}>{resultado.fecha}: </Text>
-									<Text style={styles.content_text}>{resultado.resultado}</Text>
-									<Icon name='magnify' color='#FFF' size={20} />
+						{jugadores &&
+							jugadores.map(jugador => (
+								<View style={styles.content} key={jugador.jugador}>
+									<Text style={styles.content_text}>{jugador.jugador}: </Text>
+									<Text style={styles.content_text}>{jugador.alias} - </Text>
+									<Text style={styles.content_text}>{jugador.average}</Text>
+									<Icon name='pencil' color='#FFF' size={20} />
+									<Icon name='trash-can' color='#ce1616' size={20} />
 								</View>
 							))}
 					</View>
@@ -106,4 +107,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default OutcomeScreen;
+export default TeamsScreen;

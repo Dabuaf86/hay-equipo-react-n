@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
 	ImageBackground,
 	ScrollView,
@@ -8,6 +7,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
@@ -15,30 +15,28 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 const BGI = require('../../../assets/futbol_1.png');
 
 const ResetPasswordScreen = () => {
-	// const [code, setCode] = useState('');
-	// const [newPassword, setNewPassword] = useState('');
-	// const [newPasswordRepeat, setNewPasswordRepeat] = useState('');
 
 	const navigation = useNavigation();
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-		watch,
-	} = useForm();
+	const { control, handleSubmit, watch } = useForm();
+
+	const auth = FIREBASE_AUTH;
 
 	const passwordWatch = watch('password');
 
 	const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;
 
-	const onSubmit = data => {
-		console.log(data);
-		// Validate code and passwords
+	const onSubmit = async data => {
+		const { email, code, password } = data;
+		try {
+			await auth.forgotPasswordSubmit(email, code, password);
+			navigation.navigate('InsideNavigation');
+		} catch (error) {
+			Alert.alert('Ups! Algo salió mal', error.message);
+		}
 
-		navigation.navigate('Home');
 	};
 
-	const onSignIn = e => {
+	const onSignIn = () => {
 		navigation.navigate('SignIn');
 	};
 

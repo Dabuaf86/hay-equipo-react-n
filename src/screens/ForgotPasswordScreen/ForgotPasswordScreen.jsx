@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import {
+	Alert,
 	ImageBackground,
 	ScrollView,
 	StyleSheet,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { FIREBASE_AUTH } from '../../../firebase-config';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
@@ -15,25 +16,24 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 const BGI = require('../../../assets/futbol_1.png');
 
 const ForgotPasswordScreen = () => {
-	// const [email, setEmail] = useState('');
 
 	const navigation = useNavigation();
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-	} = useForm();
+	const { control, handleSubmit } = useForm();
+
+	const auth = FIREBASE_AUTH;
 
 	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 
-	const onSend = email => {
-		console.log(email);
-		// Validate email
-
-		navigation.navigate('ResetPassword');
+	const onSend = async email => {
+		try {
+			await auth.forgotPassword(email);
+			navigation.navigate('ResetPassword');
+		} catch (error) {
+			Alert.alert('Ups! Algo salió mal', error.message);
+		}
 	};
 
-	const onSignIn = e => {
+	const onSignIn = () => {
 		navigation.navigate('SignIn');
 	};
 
