@@ -50,12 +50,14 @@ const ResetPasswordScreen = () => {
 							<CustomInput
 								control={control}
 								name='code'
+								icon='lock'
 								placeholder='Código de Confirmación'
 								rules={{ required: 'Debes ingresar el código recibido' }}
 							/>
 							<CustomInput
 								control={control}
 								name='new-password'
+								icon='lock'
 								placeholder='Nueva contraseña'
 								rules={{
 									required: 'Debes ingresar una contraseña',
@@ -69,6 +71,7 @@ const ResetPasswordScreen = () => {
 							<CustomInput
 								control={control}
 								name='new-password-repeat'
+								icon='lock'
 								placeholder='Repetir nueva contraseña'
 								rules={{
 									validate: value =>

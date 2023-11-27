@@ -16,7 +16,6 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 const BGI = require('../../../assets/futbol_1.png');
 
 const ConfirmEmailScreen = () => {
-
 	const route = useRoute();
 	const navigation = useNavigation();
 	const { control, handleSubmit, watch } = useForm({
@@ -73,6 +72,7 @@ const ConfirmEmailScreen = () => {
 							<CustomInput
 								control={control}
 								name='email'
+								icon='at'
 								placeholder='Email'
 								value={email}
 								// onChangeText={handleChange}
@@ -87,6 +87,7 @@ const ConfirmEmailScreen = () => {
 							<CustomInput
 								control={control}
 								name='confirmation-code'
+								icon='lock'
 								placeholder='Código de confirmación'
 								value={confirmationCode}
 								// onChangeText={handleChange}

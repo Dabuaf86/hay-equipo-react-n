@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F32B0F85',
 	},
 	container_secondary: {
-		borderColor: '#f37a1d',
+		borderColor: '#F37A1D',
 		borderWidth: 2,
 	},
 	container_link: {
@@ -56,22 +56,22 @@ const styles = StyleSheet.create({
 	},
 	text_primary: {
 		fontSize: 18,
-		color: '#ffffff',
+		color: '#FFFFFF',
 		fontWeight: 'bold',
 	},
 	text_tertiary: {
 		fontSize: 18,
-		color: '#ffffff',
+		color: '#FFFFFF',
 		fontWeight: 'bold',
 	},
 	text_secondary: {
 		fontSize: 18,
-		color: '#f37a1d',
+		color: '#F37A1D',
 		fontWeight: 'bold',
 	},
 	text_link: {
 		fontSize: 16,
-		color: '#ffffff',
+		color: '#FFFFFF',
 		textDecorationLine: 'underline',
 	},
 });

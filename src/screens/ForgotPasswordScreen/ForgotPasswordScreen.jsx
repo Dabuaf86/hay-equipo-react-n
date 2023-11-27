@@ -47,6 +47,7 @@ const ForgotPasswordScreen = () => {
 							<CustomInput
 								control={control}
 								name='email'
+								icon='at'
 								placeholder='Email'
 								rules={{
 									required: 'Debes ingresar tu email',

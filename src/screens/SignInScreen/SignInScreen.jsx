@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-	ActivityIndicator,
 	Alert,
 	Image,
 	ImageBackground,
@@ -15,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { FIREBASE_AUTH } from '../../../firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
@@ -82,6 +82,7 @@ const SignInScreen = () => {
 								<CustomInput
 									control={control}
 									name='email'
+									icon='at'
 									label='Email'
 									width={width * 0.6}
 									placeholder='Email'
@@ -91,6 +92,7 @@ const SignInScreen = () => {
 								<CustomInput
 									control={control}
 									name='password'
+									icon='lock'
 									label='Contraseña'
 									width={width * 0.6}
 									placeholder='Contraseña'
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: '100%',
 		resizeMode: 'cover',
+		// transform: [{ rotate: '-5deg' }],
 	},
 	title: {
 		alignSelf: 'center',

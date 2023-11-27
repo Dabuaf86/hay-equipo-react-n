@@ -76,6 +76,7 @@ const SignUpScreen = () => {
 							<CustomInput
 								control={control}
 								name='email'
+								icon='at'
 								label='Email'
 								placeholder='Email'
 								rules={{
@@ -89,6 +90,7 @@ const SignUpScreen = () => {
 							<CustomInput
 								control={control}
 								name='password'
+								icon='lock'
 								label='Contraseña'
 								placeholder='Contraseña'
 								secureTextEntry
@@ -104,6 +106,7 @@ const SignUpScreen = () => {
 							<CustomInput
 								control={control}
 								name='password-repeat'
+								icon='lock'
 								label='Repetir contraseña'
 								placeholder='Repetir contraseña'
 								secureTextEntry
