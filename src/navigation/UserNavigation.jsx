@@ -2,7 +2,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import AboutScreen from '../screens/AboutScreen/AboutScreen';
 import OutcomeScreen from '../screens/OutcomeScreen/OutcomeScreen';
 import PlayerScreen from '../screens/PlayerScreen/PlayerScreen';
 import TeamsScreen from '../screens/TeamsScreen/TeamsScreen';
@@ -15,7 +14,7 @@ const UserNavigation = () => {
 	return (
 		<NavigationContainer independent={true}>
 			<Tab.Navigator
-				initialRouteName='Acerca'
+				initialRouteName='Principal'
 				screenOptions={({ route }) => ({
 					tabBarActiveTintColor: '#27CD2E',
 					tabBarInactiveTintColor: '#545151',
@@ -50,7 +49,6 @@ const UserNavigation = () => {
 				<Tab.Screen name='Jugadores' component={PlayerScreen} />
 				<Tab.Screen name='Equipos' component={TeamsScreen} />
 				<Tab.Screen name='Resultados' component={OutcomeScreen} />
-				<Tab.Screen name='Acerca' component={AboutScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

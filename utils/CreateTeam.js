@@ -150,39 +150,6 @@ const createValueTeam = playersList => {
 
 const lista_5 = [
 	{
-		"name": "Daniel Abuaf",
-		"alias": "Dani",
-		"position": "defense",
-		"is_goalKeeper": false,
-		"is_passer": true,
-		"defense": 7,
-		"attack": 6,
-		"average": 6.5,
-		"winning_ratio": ""
-	},
-	{
-		"name": "Martín Fernández",
-		"alias": "Tincho",
-		"position": "mid_field",
-		"is_goalKeeper": false,
-		"is_passer": true,
-		"defense": 7,
-		"attack": 8,
-		"average": 7.5,
-		"winning_ratio": ""
-	},
-	{
-		"name": "Mariano Strugo",
-		"alias": "Marianito",
-		"position": "defense",
-		"is_goalKeeper": true,
-		"is_passer": true,
-		"defense": 8,
-		"attack": 6,
-		"average": 7,
-		"winning_ratio": ""
-	},
-	{
 		"name": "Gustavo Olivieri",
 		"alias": "Gusti",
 		"position": "defense",
@@ -191,6 +158,17 @@ const lista_5 = [
 		"defense": 6,
 		"attack": 4,
 		"average": 5,
+		"winning_ratio": ""
+	},
+	{
+		"name": "Daniel Abuaf",
+		"alias": "Dani",
+		"position": "defense",
+		"is_goalKeeper": false,
+		"is_passer": true,
+		"defense": 7,
+		"attack": 6,
+		"average": 6.5,
 		"winning_ratio": ""
 	},
 	{
@@ -205,25 +183,14 @@ const lista_5 = [
 		"winning_ratio": ""
 	},
 	{
-		"name": "Ernesto Schiutto",
-		"alias": "Ernesto",
-		"position": "defense",
-		"is_goalKeeper": false,
-		"is_passer": true,
-		"defense": 7,
-		"attack": 5,
-		"average": 6,
-		"winning_ratio": ""
-	},
-	{
-		"name": "Alexis Saladino",
-		"alias": "Ale",
+		"name": "Fernando Garagoli",
+		"alias": "Fer",
 		"position": "forward",
 		"is_goalKeeper": false,
 		"is_passer": true,
-		"defense": 4,
-		"attack": 7,
-		"average": 5.5,
+		"defense": 5,
+		"attack": 9,
+		"average": 7,
 		"winning_ratio": ""
 	},
 	{
@@ -238,24 +205,13 @@ const lista_5 = [
 		"winning_ratio": ""
 	},
 	{
-		"name": "Juan",
-		"alias": "Juan",
-		"position": "mid_field",
+		"name": "Nicolás Sofo",
+		"alias": "Nico Sofo",
+		"position": "defense",
 		"is_goalKeeper": true,
 		"is_passer": true,
 		"defense": 9,
-		"attack": 7,
-		"average": 8,
-		"winning_ratio": ""
-	},
-	{
-		"name": "Carlos Saladino",
-		"alias": "Charly",
-		"position": "mid_field",
-		"is_goalKeeper": true,
-		"is_passer": true,
-		"defense": 7,
-		"attack": 9,
+		"attack": 6,
 		"average": 7.5,
 		"winning_ratio": ""
 	},
@@ -271,6 +227,17 @@ const lista_5 = [
 		"winning_ratio": ""
 	},
 	{
+		"name": "Pablo Banchero",
+		"alias": "Pancho",
+		"position": "defense",
+		"is_goalKeeper": true,
+		"is_passer": true,
+		"defense": 8,
+		"attack": 7,
+		"average": 7.5,
+		"winning_ratio": ""
+	},
+	{
 		"name": "Rodrigo",
 		"alias": "Rodri",
 		"position": "forward",
@@ -279,6 +246,17 @@ const lista_5 = [
 		"defense": 7,
 		"attack": 10,
 		"average": 8.5,
+		"winning_ratio": ""
+	},
+	{
+		"name": "Amigo de Pablo",
+		"alias": "Amigo de Pablo",
+		"position": "defense",
+		"is_goalKeeper": false,
+		"is_passer": true,
+		"defense": 7,
+		"attack": 8,
+		"average": 7.5,
 		"winning_ratio": ""
 	},
 	{
@@ -293,39 +271,39 @@ const lista_5 = [
 		"winning_ratio": ""
 	},
 	{
-		"name": "Andrés Valija",
-		"alias": "Andrés",
-		"position": "defense",
-		"is_goalKeeper": false,
-		"is_passer": true,
-		"defense": 6,
-		"attack": 4,
-		"average": 5,
-		"winning_ratio": ""
-	},
-	{
-		"name": "Mendi",
-		"alias": "Mendi",
+		"name": "Matías",
+		"alias": "Mati amigo de MET",
 		"position": "mid_field",
 		"is_goalKeeper": false,
 		"is_passer": true,
-		"defense": 7,
+		"defense": 6,
 		"attack": 8,
-		"average": 7.5,
+		"average": 7,
 		"winning_ratio": ""
 	},
 	{
-		"name": "Pablo Banchero",
-		"alias": "Pancho",
-		"position": "defense",
+		"name": "Gustavo Tiralongo",
+		"alias": "GT",
+		"position": "mid_field",
 		"is_goalKeeper": true,
+		"is_passer": true,
+		"defense": 6,
+		"attack": 8,
+		"average": 7,
+		"winning_ratio": ""
+	},
+	{
+		"name": "Nicolás Paulín",
+		"alias": "Soretiten",
+		"position": "defense",
+		"is_goalKeeper": false,
 		"is_passer": true,
 		"defense": 8,
 		"attack": 7,
 		"average": 7.5,
 		"winning_ratio": ""
 	}
-];
+]
 
 for (let index = 0; index < 3; index++) {
 	console.log(createValueTeam(lista_5));
