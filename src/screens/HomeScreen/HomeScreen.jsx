@@ -9,10 +9,15 @@ import {
 } from 'react-native';
 import { signOut } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../../firebase-config';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CustomButton from '../../components/CustomButton/CustomButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { version, aboutText, linkObj } from './aboutContent';
+import { Pressable } from 'react-native';
 
 const BGI = require('../../../assets/futbol_1.png');
+const BGI2 = require('../../../assets/futbol_2.jpg');
 
 const HomeScreen = () => {
 	const [loading, setLoading] = useState(false);
@@ -26,14 +31,24 @@ const HomeScreen = () => {
 			[
 				{
 					text: 'Cancel',
-					onPress: null,
+					onPress: () => {
+						return null;
+					},
 					style: 'cancel',
 				},
-				{ text: 'OK', onPress: () => signOut(auth) },
+				{
+					text: 'OK',
+					onPress: () => {
+						AsyncStorage.clear();
+						signOut(auth);
+					},
+				},
 			],
 			{
 				cancelable: true,
-				onDismiss: null,
+				onDismiss: () => {
+					return null;
+				},
 			}
 		);
 
@@ -42,6 +57,7 @@ const HomeScreen = () => {
 		setLoading(true);
 		try {
 			customAlertBtn();
+			setLoading(false);
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -52,12 +68,39 @@ const HomeScreen = () => {
 			<View style={styles.container}>
 				<ImageBackground style={styles.img} source={BGI}>
 					<Text style={styles.title}>Home</Text>
+					<View style={styles.about_content}>
+						<Text style={styles.version_text}>hay-equipo ver {version}</Text>
+					</View>
+					<View style={styles.about_content}>
+						<Text style={styles.about_text}>{aboutText}</Text>
+					</View>
+					{linkObj &&
+						linkObj.map(link => {
+							return (
+								<Pressable
+									style={styles.content}
+									id={link.name}
+									onPress={() => open(link.content)}
+								>
+									<Icon
+										name={link.icon}
+										color='limegreen'
+										size={30}
+										style={{ paddingRight: 10 }}
+									/>
+									<Text style={styles.content_text}>
+										{link['short-content']}
+									</Text>
+								</Pressable>
+							);
+						})}
 					<View style={styles.btn_container}>
 						<CustomButton
 							text='Salir'
 							onPress={onSignOut}
 							type='tertiary'
 							icon='exit-to-app'
+							width={150}
 						/>
 					</View>
 				</ImageBackground>
@@ -83,11 +126,51 @@ const styles = StyleSheet.create({
 		fontSize: 40,
 		fontWeight: 'bold',
 		color: 'limegreen',
+		marginTop: 40,
 	},
 	btn_container: {
 		marginTop: 50,
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	logoContainer: {
+		alignItems: 'center',
+		padding: 20,
+	},
+	logo: {
+		// width: '70%',
+		maxWidth: 40,
+		maxHeight: 40,
+	},
+	about_content: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginTop: 50,
+	},
+	content: {
+		width: '80%',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		marginTop: 20,
+	},
+	version_text: {
+		color: 'white',
+		fontSize: 14,
+		fontStyle: 'italic',
+	},
+	about_text: {
+		color: 'white',
+		fontSize: 22,
+		fontWeight: 'bold',
+		textAlign: 'justify',
+		width: '80%',
+	},
+	content_text: {
+		color: 'white',
+		fontWeight: 'bold',
+		fontSize: 18,
 	},
 });
 

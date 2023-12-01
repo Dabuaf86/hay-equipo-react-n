@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { FIREBASE_AUTH } from '../../../firebase-config';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import CustomInput from '../../components/CustomInput';
@@ -30,6 +30,7 @@ const SignUpScreen = () => {
 	const EMAIL_REGEX = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 
 	const auth = FIREBASE_AUTH;
+	const db = FIREBASE_DB;
 
 	const onSignUp = async data => {
 		const { email, password } = data;
@@ -41,7 +42,15 @@ const SignUpScreen = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
 				const user = userCredential.user;
-				console.log(user);
+				const uid = user.uid;
+				const data = {
+					id: uid,
+					email,
+				};
+				// console.log(user);
+				const usersRef = db.collection('users');
+				console.log('USER REF: ', usersRef);
+				usersRef.doc(uid).set(data);
 				// navigation.navigate('ConfirmEmail', { email });
 			})
 			.catch(error => {
