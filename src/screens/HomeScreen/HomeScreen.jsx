@@ -79,7 +79,7 @@ const HomeScreen = () => {
 							return (
 								<Pressable
 									style={styles.content}
-									id={link.name}
+									key={link.name}
 									onPress={() => open(link.content)}
 								>
 									<Icon
