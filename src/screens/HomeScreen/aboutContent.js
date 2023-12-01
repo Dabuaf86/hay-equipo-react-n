@@ -19,7 +19,7 @@ export const linkObj = [
 		content:
 			'https://play.google.com/store/apps/details?id=com.dabuaf.hay-equipo&hl=es_AR&gl=US',
 		'short-content': 'google.com/store/hay-equipo',
-		icon: 'google-play',
+		icon: 'google',
 	},
 	{
 		name: 'appstore',
