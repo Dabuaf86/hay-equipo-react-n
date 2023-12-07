@@ -75,7 +75,6 @@ const SignUpScreen = () => {
 	};
 
 	return (
-		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={styles.container}>
 				<ImageBackground style={styles.img} source={BGI}>
 					<Text style={styles.title}>Registro</Text>
@@ -149,7 +148,6 @@ const SignUpScreen = () => {
 					</View>
 				</ImageBackground>
 			</View>
-		</ScrollView>
 	);
 };
 
@@ -159,10 +157,7 @@ const styles = StyleSheet.create({
 	},
 	img: {
 		flex: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
-		height: '100%',
 		resizeMode: 'cover',
 	},
 	title: {

@@ -64,16 +64,18 @@ const HomeScreen = () => {
 	};
 
 	return (
-		<ScrollView showsVerticalScrollIndicator={false}>
-			<View style={styles.container}>
-				<ImageBackground style={styles.img} source={BGI}>
-					<Text style={styles.title}>Home</Text>
+		<View style={styles.container}>
+			<ImageBackground style={styles.img} source={BGI}>
+				<Text style={styles.title}>Home</Text>
+				<View>
 					<View style={styles.about_content}>
 						<Text style={styles.version_text}>hay-equipo ver {version}</Text>
 					</View>
-					<View style={styles.about_content}>
-						<Text style={styles.about_text}>{aboutText}</Text>
-					</View>
+				</View>
+				<View style={styles.about_content}>
+					<Text style={styles.about_text}>{aboutText}</Text>
+				</View>
+				<View>
 					{linkObj &&
 						linkObj.map(link => {
 							return (
@@ -94,18 +96,18 @@ const HomeScreen = () => {
 								</Pressable>
 							);
 						})}
-					<View style={styles.btn_container}>
-						<CustomButton
-							text='Salir'
-							onPress={onSignOut}
-							type='tertiary'
-							icon='exit-to-app'
-							width={150}
-						/>
-					</View>
-				</ImageBackground>
-			</View>
-		</ScrollView>
+				</View>
+				<View style={styles.btn_container}>
+					<CustomButton
+						text='Salir'
+						onPress={onSignOut}
+						type='tertiary'
+						icon='exit-to-app'
+						width={150}
+					/>
+				</View>
+			</ImageBackground>
+		</View>
 	);
 };
 
@@ -116,9 +118,7 @@ const styles = StyleSheet.create({
 	img: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center',
-		width: '100%',
-		height: '100%',
+		justifyContent: 'space-evenly',
 		resizeMode: 'cover',
 	},
 	title: {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
 	},
 	version_text: {
 		color: 'white',
-		fontSize: 14,
+		fontSize: 16,
 		fontStyle: 'italic',
 	},
 	about_text: {

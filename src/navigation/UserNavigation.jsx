@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import OutcomeScreen from '../screens/OutcomeScreen/OutcomeScreen';
-import PlayerScreen from '../screens/PlayerScreen/PlayerScreen';
+import CreatePlayerScreen from '../screens/PlayerScreen/CreatePlayerScreen';
 import TeamsScreen from '../screens/TeamsScreen/TeamsScreen';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,7 +46,7 @@ const UserNavigation = () => {
 				})}
 			>
 				<Tab.Screen name='Principal' component={HomeScreen} />
-				<Tab.Screen name='Jugadores' component={PlayerScreen} />
+				<Tab.Screen name='Jugadores' component={CreatePlayerScreen} />
 				<Tab.Screen name='Equipos' component={TeamsScreen} />
 				<Tab.Screen name='Resultados' component={OutcomeScreen} />
 			</Tab.Navigator>

@@ -22,7 +22,7 @@ import CustomSlider from '../../components/CustomSlider/CustomSlider';
 const BGI = require('../../../assets/futbol_2.jpg');
 // const ICON_IMG = require('../../../assets/Facebook F.png');
 
-const PlayerScreen = () => {
+const CreatePlayerScreen = () => {
 	// const [players, setPlayers] = useState([]);
 	const [player, setPlayer] = useState({
 		name: '',
@@ -38,8 +38,8 @@ const PlayerScreen = () => {
 	const [loading, setLoading] = useState(false);
 	const [goalkeeperChecked, setGoalkeeperChecked] = useState(false);
 	const [isPasserChecked, setIsPasserChecked] = useState(true);
-	const [defense, setDefense] = useState(0);
-	const [attack, setAttack] = useState(0);
+	const [defense, setDefense] = useState(player.defense);
+	const [attack, setAttack] = useState(player.attack);
 
 	useEffect(() => {
 		let total = (defense + attack) / 2;
@@ -153,110 +153,105 @@ const PlayerScreen = () => {
 	];
 
 	return (
-		<ScrollView>
-			<View style={styles.container}>
-				<ImageBackground style={styles.img} source={BGI}>
-					<Text style={styles.title}>Crear jugador</Text>
-					<View style={styles.player_container}>
-						<KeyboardAvoidingView
-							behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-							style={styles.form_container}
-						>
-							<CustomInput
-								control={control}
-								label='Nombre'
-								name='name'
-								width={width * 0.6}
-								placeholder='Nombre'
-								rules={{
-									required: 'Debe agregar un nombre al jugador',
-								}}
-								value={player.name}
-								onChangeText={handleChange}
-							/>
-							<CustomInput
-								control={control}
-								label='Alias'
-								name='alias'
-								width={width * 0.6}
-								placeholder='Alias'
-								rules={{
-									required:
-										'Si no tiene un alias, repite el nombre del jugador',
-								}}
-								value={player.alias}
-								onChangeText={handleChange}
-							/>
-							<View style={styles.picker_container}>
-								<Picker
-									selectedValue={player.position}
-									onValueChange={value => {
-										setPlayer({ ...player, position: value });
-									}}
-									style={styles.picker}
-									mode='dialog'
-									prompt='Posición'
-									dropdownIconColor='#fff'
-									dropdownIconRippleColor='#27CD2E95'
-									itemStyle={{ color: '#f37a1d', fontWeight: 'bold' }}
-								>
-									{/* {positionEnum &&
-									positionEnum.map((item, i) => {
-										<Picker.Item
-											label={item.label}
-											value={item.value}
-											key={i}
-										/>;
-									})} */}
-									<Picker.Item label='Arquero' value='goal_keeper' />
-									<Picker.Item label='Defensor' value='defense' />
-									<Picker.Item label='Mediocampista' value='mid_field' />
-									<Picker.Item label='Delantero' value='forward' />
-								</Picker>
-							</View>
-							<CustomSlider
-								tag='defense'
-								// icon={ICON_IMG}
-								label='Defensa'
-								onChange={value => setDefense(value)}
-								value={defense}
-							/>
-							<CustomSlider
-								// icon={ICON_IMG}
-								tag='attack'
-								label='Ataque'
-								onChange={value => setAttack(value)}
-								value={attack}
-							/>
-							<CustomCheckbox
-								tag='isGoalKeeper'
-								label='Ataja?'
-								icon='checkmark'
-								onChange={() => setGoalkeeperChecked(!goalkeeperChecked)}
-								checked={goalkeeperChecked}
-							/>
-							<CustomCheckbox
-								tag='isPasser'
-								label='Es de pasarla?'
-								icon='checkmark'
-								onChange={() => setIsPasserChecked(!isPasserChecked)}
-								checked={isPasserChecked}
-							/>
-							<View style={styles.input_container}>
-								<Text style={styles.input}>Promedio: {player.average}</Text>
-							</View>
-						</KeyboardAvoidingView>
-					</View>
-					<View style={styles.button_container}>
-						<CustomButton
-							text='Crear jugador'
-							onPress={handleSubmit(onCreatePlayer)}
+		<View style={styles.container}>
+			<ImageBackground style={styles.img} source={BGI}>
+				<Text style={styles.title}>Crear jugador</Text>
+				<View style={styles.player_container}>
+					<KeyboardAvoidingView
+						behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+						style={styles.form_container}
+					>
+						<CustomInput
+							control={control}
+							label='Nombre'
+							name='name'
+							width={width * 0.6}
+							placeholder='Nombre'
+							rules={{
+								required: 'Debe agregar un nombre al jugador',
+							}}
+							value={player.name}
+							onChangeText={handleChange}
 						/>
-						<CustomButton text='Cancelar' onPress={onCancel} type='tertiary' />
-					</View>
-				</ImageBackground>
-			</View>
-		</ScrollView>
+						<CustomInput
+							control={control}
+							label='Alias'
+							name='alias'
+							width={width * 0.6}
+							placeholder='Alias'
+							rules={{
+								required: 'Si no tiene un alias, repite el nombre del jugador',
+							}}
+							value={player.alias}
+							onChangeText={handleChange}
+						/>
+						<View style={styles.picker_container}>
+							<Picker
+								selectedValue={player.position}
+								onValueChange={position => {
+									setPlayer({ ...player, position });
+								}}
+								style={styles.picker}
+								mode='dialog'
+								prompt='Posición'
+								dropdownIconColor='#fff'
+								dropdownIconRippleColor='#27CD2E95'
+								itemStyle={{ color: '#f37a1d', fontWeight: 'bold' }}
+							>
+								{positionEnum &&
+									positionEnum.map((item, i) => {
+										return (
+											<Picker.Item
+												label={item.label}
+												value={item.value}
+												key={i}
+											/>
+										);
+									})}
+							</Picker>
+						</View>
+						<CustomSlider
+							tag='defense'
+							// icon={ICON_IMG}
+							label='Defensa'
+							onChange={value => setDefense(value)}
+							value={defense}
+						/>
+						<CustomSlider
+							// icon={ICON_IMG}
+							tag='attack'
+							label='Ataque'
+							onChange={value => setAttack(value)}
+							value={attack}
+						/>
+						<CustomCheckbox
+							tag='isGoalKeeper'
+							label='Ataja?'
+							icon='checkmark'
+							onChange={() => setGoalkeeperChecked(!goalkeeperChecked)}
+							checked={goalkeeperChecked}
+						/>
+						<CustomCheckbox
+							tag='isPasser'
+							label='Es de pasarla?'
+							icon='checkmark'
+							onChange={() => setIsPasserChecked(!isPasserChecked)}
+							checked={isPasserChecked}
+						/>
+						<View style={styles.input_container}>
+							<Text style={styles.input}>Promedio: {player.average}</Text>
+						</View>
+					</KeyboardAvoidingView>
+				</View>
+				<View style={styles.button_container}>
+					<CustomButton
+						text='Crear jugador'
+						onPress={handleSubmit(onCreatePlayer)}
+					/>
+					<CustomButton text='Cancelar' onPress={onCancel} type='tertiary' />
+				</View>
+			</ImageBackground>
+		</View>
 	);
 };
 
@@ -268,8 +263,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
-		height: '100%',
 		resizeMode: 'cover',
 	},
 	title: {
@@ -329,7 +322,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default PlayerScreen;
+export default CreatePlayerScreen;
 
 {
 	/* <View style={styles.textContainer}>

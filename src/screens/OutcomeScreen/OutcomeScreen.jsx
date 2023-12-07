@@ -44,23 +44,23 @@ const resultados = [
 
 const OutcomeScreen = () => {
 	return (
-		<ScrollView>
-			<View style={styles.container}>
-				<ImageBackground style={styles.img} source={BGI}>
-					<Text style={styles.title}>Resultados</Text>
-					<View style={styles.list}>
-						{resultados &&
-							resultados.map(resultado => (
-								<View style={styles.content} key={resultado.lista}>
-									<Text style={styles.content_text}>{resultado.fecha}: </Text>
-									<Text style={styles.content_text}>{resultado.resultado}</Text>
-									<Icon name='magnify' color='#FFF' size={20} />
-								</View>
-							))}
-					</View>
-				</ImageBackground>
-			</View>
-		</ScrollView>
+		// <ScrollView showsVerticalScrollIndicator={false}>
+		<View style={styles.container}>
+			<ImageBackground style={styles.img} source={BGI}>
+				<Text style={styles.title}>Resultados</Text>
+				<View style={styles.list}>
+					{resultados &&
+						resultados.map(resultado => (
+							<View style={styles.content} key={resultado.lista}>
+								<Text style={styles.content_text}>{resultado.fecha}: </Text>
+								<Text style={styles.content_text}>{resultado.resultado}</Text>
+								<Icon name='magnify' color='#FFF' size={20} />
+							</View>
+						))}
+				</View>
+			</ImageBackground>
+		</View>
+		// </ScrollView>
 	);
 };
 
@@ -72,8 +72,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
-		height: '100%',
 		resizeMode: 'cover',
 	},
 	title: {

@@ -65,66 +65,64 @@ const SignInScreen = () => {
 	// };
 
 	return (
-		<ScrollView showsVerticalScrollIndicator={false}>
-			<View style={styles.container}>
-				<ImageBackground style={styles.img} source={BGI}>
-					<View style={styles.logoContainer}>
+		<View showsVerticalScrollIndicator={false} style={styles.container}>
+			<ImageBackground style={styles.img} source={BGI}>
+				{/* <View style={styles.logoContainer}>
 						<Image
 							source={Logo}
 							style={[styles.logo, { height: height * 0.3 }]}
 							resizeMode='contain'
 						/>
-					</View>
-					<Text style={styles.title}>Ingresar</Text>
-					<View style={styles.login_container}>
-						<SocialSignInButtons />
-						<KeyboardAvoidingView behavior='padding'>
-							<View style={styles.form_login}>
-								<CustomInput
-									control={control}
-									name='email'
-									label='Email'
-									width={width * 0.6}
-									placeholder='Email'
-									// onChangeText={handleChange}
-									rules={{ required: 'Debes ingresar tu email' }}
-								/>
-								<CustomInput
-									control={control}
-									name='password'
-									label='Contraseña'
-									width={width * 0.6}
-									placeholder='Contraseña'
-									// onChangeText={handleChange}
-									secureTextEntry
-									rules={{
-										required: 'Debes ingresar una contraseña válida',
-									}}
-								/>
+					</View> */}
+				<Text style={styles.title}>Ingresar</Text>
+				<View style={styles.login_container}>
+					<SocialSignInButtons />
+					<KeyboardAvoidingView behavior='padding'>
+						<View style={styles.form_login}>
+							<CustomInput
+								control={control}
+								name='email'
+								label='Email'
+								width={width * 0.6}
+								placeholder='Email'
+								// onChangeText={handleChange}
+								rules={{ required: 'Debes ingresar tu email' }}
+							/>
+							<CustomInput
+								control={control}
+								name='password'
+								label='Contraseña'
+								width={width * 0.6}
+								placeholder='Contraseña'
+								// onChangeText={handleChange}
+								secureTextEntry
+								rules={{
+									required: 'Debes ingresar una contraseña válida',
+								}}
+							/>
+							<CustomButton
+								onPress={handleSubmit(onSignIn)}
+								text={loading ? 'Cargando...' : 'Ingresar'}
+							/>
+							<CustomButton
+								onPress={onForgotPassword}
+								text='Recuperar contraseña'
+								type='link'
+							/>
+							<View style={styles.anchor_text_container}>
+								<Text style={styles.anchor_text}>No tienes una cuenta?</Text>
 								<CustomButton
-									onPress={handleSubmit(onSignIn)}
-									text={loading ? 'Cargando...' : 'Ingresar'}
-								/>
-								<CustomButton
-									onPress={onForgotPassword}
-									text='Recuperar contraseña'
+									onPress={onSignUp}
+									text='Registrate acá'
 									type='link'
+									width={150}
 								/>
-								<View style={styles.anchor_text_container}>
-									<Text style={styles.anchor_text}>No tienes una cuenta?</Text>
-									<CustomButton
-										onPress={onSignUp}
-										text='Registrate acá'
-										type='link'
-										width={150}
-									/>
-								</View>
 							</View>
-						</KeyboardAvoidingView>
-					</View>
-				</ImageBackground>
-			</View>
-		</ScrollView>
+						</View>
+					</KeyboardAvoidingView>
+				</View>
+			</ImageBackground>
+		</View>
 	);
 };
 
@@ -134,10 +132,7 @@ const styles = StyleSheet.create({
 	},
 	img: {
 		flex: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
-		height: '100%',
 		resizeMode: 'cover',
 	},
 	title: {

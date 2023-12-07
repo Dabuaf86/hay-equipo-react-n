@@ -38,7 +38,7 @@ const ForgotPasswordScreen = () => {
 	};
 
 	return (
-		<ScrollView showsVerticalScrollIndicator={false}>
+		// <ScrollView showsVerticalScrollIndicator={false}>
 			<View style={styles.container}>
 				<ImageBackground style={styles.img} source={BGI}>
 					<Text style={styles.title}>Enviar Código</Text>
@@ -71,7 +71,7 @@ const ForgotPasswordScreen = () => {
 					</View>
 				</ImageBackground>
 			</View>
-		</ScrollView>
+		// </ScrollView>
 	);
 };
 
@@ -81,10 +81,7 @@ const styles = StyleSheet.create({
 	},
 	img: {
 		flex: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
-		height: '100%',
 		resizeMode: 'cover',
 	},
 	title: {
