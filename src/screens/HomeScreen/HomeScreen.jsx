@@ -60,6 +60,7 @@ const HomeScreen = () => {
 			setLoading(false);
 		} catch (error) {
 			console.log(error.message);
+			Alert.alert('Algo salió mal');
 		}
 	};
 

@@ -125,7 +125,7 @@ const CreatePlayerScreen = () => {
 	// };
 
 	const onCancel = async () => {
-		navigation.navigate('player-list');
+		navigation.navigate('Players');
 	};
 
 	const onCreatePlayer = async () => {
@@ -138,7 +138,7 @@ const CreatePlayerScreen = () => {
 		} finally {
 			setLoading(false);
 		}
-		navigation.navigate('player-list');
+		navigation.navigate('Players');
 	};
 
 	const handleChange = (name, value) => {

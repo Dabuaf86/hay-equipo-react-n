@@ -148,7 +148,7 @@ const createValueTeam = playersList => {
 	};
 };
 
-const lista_5 = [
+const lista_7 = [
 	{
 		"name": "Gustavo Olivieri",
 		"alias": "Gusti",
